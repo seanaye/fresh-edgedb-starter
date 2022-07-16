@@ -14,6 +14,12 @@ Run migrations:
 edgedb migrations apply
 ```
 
+Generate typescript client:
+
+```
+deno task codegen
+```
+
 Start the project:
 
 ```
