@@ -2,6 +2,18 @@
 
 ### Usage
 
+Init the project:
+
+```
+edgedb project init
+```
+
+Run migrations:
+
+```
+edgedb migrations apply
+```
+
 Start the project:
 
 ```
