@@ -3,8 +3,10 @@ import { h } from "preact";
 import { tw } from "@twind";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import CounterInput from "../islands/CounterInput.tsx";
-import { $infer, client, e } from "../utils/edgedb.ts";
 import { z } from "https://deno.land/x/zod/mod.ts";
+import { $infer, client, e } from "../utils/edgedb.ts";
+import { gql } from "@gql"
+
 
 const get = e.params(
   {
@@ -14,10 +16,23 @@ const get = e.params(
 );
 type Data = $infer<typeof get>;
 
+const q = gql(/* GraphQL */`
+query users {
+  users {
+    id
+    name
+    age
+  }
+}
+`)
+
+
 const form = z.object({
   name: z.string().min(1),
   age: z.preprocess((v) => parseInt(v as string), z.number().min(0)),
 });
+
+
 
 export const handler: Handlers<Data> = {
   async GET(req, ctx) {

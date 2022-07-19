@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "start": "deno run -A --unstable --watch=static/,routes/ dev.ts",
+    "start": "deno run -A --unstable --watch=static/,routes/,graphql/ dev.ts & sleep 1 && deno run -A codegen/run.ts",
     "codegen": "deno run -A file:///Users/seanaye/dev/deno-npx/cli.ts npx edgeql-js --target deno"
   },
   "importMap": "./import_map.json",

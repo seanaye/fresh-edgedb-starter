@@ -9,6 +9,7 @@
     "twind/": "https://esm.sh/twind@0.16.17/",
     "https://deno.land/x/edgedb/": "https://raw.githubusercontent.com/seanaye/edgedb-js/dist/deno/",
     "https://cdn.skypack.dev/graphql?dts": "https://esm.sh/graphql@v16.5.0",
-    "https://cdn.skypack.dev/": "https://esm.sh/"
+    "https://cdn.skypack.dev/": "https://esm.sh/",
+    "@gql": "./gql/index.ts"
   }
 }
