@@ -5,8 +5,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import CounterInput from "../islands/CounterInput.tsx";
 import { z } from "https://deno.land/x/zod/mod.ts";
 import { $infer, client, e } from "../utils/edgedb.ts";
-/// reference types="../gql/gql.d.ts"
-import { gql } from "../utils/gql.ts"
+import { gql, gqlFetch } from "../utils/gql.ts"
 
 
 const get = e.params(
@@ -17,7 +16,7 @@ const get = e.params(
 );
 type Data = $infer<typeof get>;
 
-const q = gql(/* GraphQL */`
+const q = gql(`
 query users {
   users {
     id
@@ -37,14 +36,13 @@ const form = z.object({
 
 export const handler: Handlers<Data> = {
   async GET(req, ctx) {
-    const params = new URL(req.url).searchParams;
-    const maybeLimit = params.get("limit");
-    const p = z
-      .preprocess((v) => parseInt(v as string), z.number().min(0).max(100))
-      .safeParse(maybeLimit);
-    const limit = p.success ? p.data : 10;
-    const users = await get.run(client, { limit });
-    return ctx.render(users);
+    const res = await gqlFetch(q)
+    if (!res.isOk()) {
+      console.log(res.error)
+      return new Response("Internal server error", { status: 500 })
+    }
+    
+    return ctx.render(res.value.data.users);
   },
   async POST(req) {
     const data = await req.formData();

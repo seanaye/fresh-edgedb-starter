@@ -6,8 +6,8 @@ declare global {
   type WindowOrWorkerGlobalScope = typeof window;
 }
 
-
+export const endpoint = "http://localhost:8000/api/graphql";
 export const gqlServer = createServer({
   schema,
-  endpoint: "http://localhost:8000/api/graphql"
+  endpoint,
 });

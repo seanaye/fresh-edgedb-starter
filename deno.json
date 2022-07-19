@@ -8,8 +8,5 @@
     "dependencies": {
       "edgedb": "https://gitpkg.now.sh/seanaye/edgedb-js/node?dist"
     }
-  },
-  "compilerOptions": {
-    "types": ["./gql/gql.d.ts"]
   }
 }
