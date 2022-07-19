@@ -5,7 +5,8 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import CounterInput from "../islands/CounterInput.tsx";
 import { z } from "https://deno.land/x/zod/mod.ts";
 import { $infer, client, e } from "../utils/edgedb.ts";
-import { gql } from "@gql"
+/// reference types="../gql/gql.d.ts"
+import { gql } from "../utils/gql.ts"
 
 
 const get = e.params(

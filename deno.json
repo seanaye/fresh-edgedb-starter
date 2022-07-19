@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "start": "deno run -A --unstable --watch=static/,routes/,graphql/ dev.ts & sleep 1 && deno run -A codegen/run.ts",
+    "start": "deno run -A --unstable --watch=static/,routes/,graphql/ dev.ts & sleep 1 && deno run -A --watch=routes/,graphql/ codegen/run.ts",
     "codegen": "deno run -A file:///Users/seanaye/dev/deno-npx/cli.ts npx edgeql-js --target deno"
   },
   "importMap": "./import_map.json",
@@ -8,5 +8,8 @@
     "dependencies": {
       "edgedb": "https://gitpkg.now.sh/seanaye/edgedb-js/node?dist"
     }
+  },
+  "compilerOptions": {
+    "types": ["./gql/gql.d.ts"]
   }
 }

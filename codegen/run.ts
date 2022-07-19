@@ -12,6 +12,16 @@ async function run() {
   const toWalk = new URL("../gql", import.meta.url).pathname;
   for await (const entry of walk(toWalk)) {
     if (!entry.isFile) continue;
+    if (entry.path.includes("index.ts")) {
+      await Deno.writeTextFile(
+        entry.path,
+        `
+import * as mod from "./gql.ts"
+export type Gql = typeof mod.gql
+`
+      );
+      continue;
+    }
     const contents = await Deno.readTextFile(entry.path);
     const next = contents
       .replace(
@@ -19,6 +29,7 @@ async function run() {
         `from 'https://esm.sh/@graphql-typed-document-node/core'`
       )
       .replace(/from '.\/graphql.js'/, `from './graphql.ts'`)
+      .replace(/import\('\.\/graphql'\)/g, `import('./graphql.ts')`)
       .replace(
         /from "([\.\/]+)(.+)"/g,
         (_match, group1: string, group2: string) => {

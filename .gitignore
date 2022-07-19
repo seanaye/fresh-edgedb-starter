@@ -2,3 +2,4 @@ dbschema/edgeql-js
 ./graphql/
 ./codegen/
 node_modules
+/gql
