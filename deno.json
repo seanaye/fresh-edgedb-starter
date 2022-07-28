@@ -1,7 +1,7 @@
 {
   "tasks": {
     "start": "deno run -A --unstable --watch=static/,routes/ dev.ts",
-    "codegen": "deno run -A file:///Users/seanaye/dev/deno-npx/cli.ts npx edgeql-js --target deno"
+    "codegen": "deno run -A https://raw.githubusercontent.com/seanaye/deno-npx/main/cli.ts npx edgeql-js --target deno"
   },
   "importMap": "./import_map.json",
   "npx": {
